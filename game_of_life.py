@@ -5,6 +5,7 @@ import cv2
 import PIL.Image
 from collections import namedtuple, defaultdict
 import time
+import matplotlib.ticker as plticker
 from tkinter import *
 endxmin=0
 endxmax=0
@@ -55,7 +56,7 @@ def displayboard(board):
         plt.title('Generation:'+str(generation))
         plt.axis([endxmin-2,endxmax+2,endymin-2,endymax+2])
         ax=plt.gca()
-        ax.grid(True)
+        #ax.grid(True)
         ax.set_ylim(ax.get_ylim()[::-1])
         ax.xaxis.tick_top()   
         ax.yaxis.set_ticks(np.arange(endymin-2, endymax+2, 1))
@@ -78,17 +79,37 @@ def displayboard(board):
         ymin=min(ys)
         if(ymin<endymin):
             endymin=ymin
-        plt.figure()
-        plt.scatter(xs,ys)
+        plt.figure(figsize=(5,5))
+        currmax=max(endxmax,endymax)
+        currmin=min(endxmin,endymin)
+        pltsize=[3,4,5,6,7,8,9,10,11,12]
+        print(currmax-currmin)
+        smul=pltsize[currmax-currmin]
+        print(smul)
+        smulmap={
+            5:1950,
+            6:1650,
+            7:1350,
+            8:870,
+            9:790,
+            10:650,
+            11:500,
+            12:450
+        }
+        s=[smulmap[smul]]*len(xs)
+        plt.scatter(xs,ys,s=s,marker='s',color='black')
         plt.title('Generation:'+str(generation))
-        plt.axis([endxmin-2,endxmax+2,endymin-2,endymax+2])
+        plt.axis([currmin-2,currmax+2,currmin-2,currmax+2])
         ax=plt.gca()
-        ax.grid(True)
+        #ax.grid(True)
         ax.set_ylim(ax.get_ylim()[::-1])
-        ax.xaxis.tick_top()   
-        ax.yaxis.set_ticks(np.arange(endymin-2, endymax+2, 1))
-        ax.xaxis.set_ticks(np.arange(endxmin-2, endxmax+2, 1))
-        ax.yaxis.tick_left()    
+        ax.xaxis.tick_top()
+
+        ax.yaxis.set_ticks(np.arange(currmin-2, currmax+2, 1))
+        ax.xaxis.set_ticks(np.arange(currmin-2, currmax+2, 1))
+        ax.yaxis.tick_left()
+        loc = plticker.MultipleLocator(base=1.0) # this locator puts ticks at regular intervals
+        ax.xaxis.set_major_locator(loc)  
         generation=generation+1
         plt.savefig('./animation/generation_'+str(generation-1)+'.png')
         plt.show()
@@ -255,7 +276,7 @@ def initializeboard():
             x += 10
         x = 10
         y += 10
-    stop = Button(root, text="Start Evolution", command = start_evol)
+    stop = Button(root, text="Start Game of Life", command = start_evol)
     stop.pack(side = RIGHT)
     canvas.bind("<Button-1>", change_colour_on_click)
     root.mainloop()
