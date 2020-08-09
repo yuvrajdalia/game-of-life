@@ -5,10 +5,11 @@ Conway's Game of Life is a problem which is related to cell evolution, in which 
 
 ## Steps to run the program
 1. Run the program by :python game_of_life.py
-2. enter the initial grid size (grid will automatically expand if required afterwards)
-3. enter the initial alive cells in the given interactive UI and click on "Start game of life".
+2. Enter the initial grid size (grid will automatically expand if required afterwards)
+3. Enter the initial alive cells in the given interactive UI and click on "Start game of life".
 ![alt text](https://github.com/yuvrajdalia/game-of-life/blob/master/images/initialize.PNG)
-4. see the evolution happening :)
+4. See the evolution happening :)
 ![alt text](https://github.com/yuvrajdalia/game-of-life/blob/master/animation/generation_6.png)
 ![alt text](https://github.com/yuvrajdalia/game-of-life/blob/master/animation/generation_7.png)
 5. after the evolution is completed (no live cells) or after first 25 generations , the animation will be stored in animation folder which can be seen.
+![alt text](https://github.com/yuvrajdalia/game-of-life/blob/master/animation/mygeneratedvideo.avi)
