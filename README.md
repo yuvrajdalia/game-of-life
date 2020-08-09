@@ -14,4 +14,4 @@ Conway's Game of Life is a problem which is related to cell evolution, in which 
 ![alt text](https://github.com/yuvrajdalia/game-of-life/blob/master/animation/generation_7.png)
 
 5. after the evolution is completed (no live cells) or after first 25 generations , the animation will be stored in animation folder which can be seen.
-![alt text](https://gifs.com/gif/71KxYO)
+![Alt Text](https://j.gifs.com/71KxYO.giff)
