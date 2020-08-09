@@ -15,3 +15,10 @@ Conway's Game of Life is a problem which is related to cell evolution, in which 
 
 5. after the evolution is completed (no live cells) or after first 25 generations , the animation will be stored in animation folder which can be seen. <br />
 ![Alt Text](https://github.com/yuvrajdalia/game-of-life/blob/master/images/gif.gif) <br />
+
+## Requirements: 
+Following python libraries will be needed to run the program :
+1. matplotlib
+2. numpy 
+3. opencv
+4. tkinter
