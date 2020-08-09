@@ -12,6 +12,7 @@ endxmax=0
 endymin=0
 endymax=0
 generation=0
+ticksize=0
 initialboardlist=[]
 Cellbox = namedtuple('Cellbox', ['x', 'y'])
 root = Tk()
@@ -47,12 +48,14 @@ def displayboard(board):
     global endxmax
     global endxmin
     global endymax
+    global ticksize
     global endymin
     xs = [x for (x, y) in board]
     ys = [y for (x, y) in board]
-    if(len(xs)==0):
-        plt.figure()
-        plt.scatter(xs,ys)
+    if(len(xs)==0 or generation==25):
+        plt.figure(figsize=(5,5))
+        s=[ticksize]*len(xs)
+        plt.scatter(xs,ys,s=ticksize,marker='s',color='black')
         plt.title('Generation:'+str(generation))
         plt.axis([endxmin-2,endxmax+2,endymin-2,endymax+2])
         ax=plt.gca()
@@ -82,21 +85,33 @@ def displayboard(board):
         plt.figure(figsize=(5,5))
         currmax=max(endxmax,endymax)
         currmin=min(endxmin,endymin)
-        pltsize=[3,4,5,6,7,8,9,10,11,12]
+        pltsize={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
         print(currmax-currmin)
-        smul=pltsize[currmax-currmin]
-        print(smul)
-        smulmap={
-            5:1950,
-            6:1650,
-            7:1350,
-            8:870,
-            9:790,
-            10:650,
-            11:500,
-            12:450
-        }
-        s=[smulmap[smul]]*len(xs)
+        if (currmax-currmin) in pltsize:
+            smul=currmax-currmin
+            print(smul)
+            smulmap={
+                1:2000,
+                2:2050,
+                3:1530,
+                4:1300,
+                5:1100,
+                6:900,
+                7:750,
+                8:600,
+                9:500,
+                10:450,
+                11:350,
+                12:300,
+                13:260,
+                14:225,
+                15:200
+            }
+            s=[smulmap[smul]]*len(xs)
+            ticksize=smulmap[smul]
+        else :
+            s=[180]*len(xs)
+            ticksize=180
         plt.scatter(xs,ys,s=s,marker='s',color='black')
         plt.title('Generation:'+str(generation))
         plt.axis([currmin-2,currmax+2,currmin-2,currmax+2])
@@ -159,7 +174,7 @@ def generate_animation():
             imResize.save( file, 'PNG', quality = 95)  
             #print(im.filename.split('\\')[-1], " is resized") 
     image_folder = '.' 
-    video_name = 'mygeneratedvideo.avi'
+    video_name = 'animation.avi'
     os.chdir("D:\projects\game of life\\animation") 
       
     images = [img for img in os.listdir(image_folder) 
